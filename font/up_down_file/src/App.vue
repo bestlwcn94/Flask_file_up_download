@@ -56,6 +56,7 @@ async function uploadFiles() {
   for (let file of files.value) {
     let formData = new FormData()
     formData.append('file', file)
+    formData.append('user', "dddd")
 
     promises.push(axios.post('http://127.0.0.1:5000/upload', formData,))
   }
@@ -68,8 +69,11 @@ async function uploadFiles() {
 </script>
 
 <template>
-<input type="file" multiple @change="onFileChange">
-<button @click="uploadFiles">Upload All</button>
+  <input type="file" multiple @change="onFileChange">
+  <button @click="uploadFiles">Upload All</button>
+  <div v-for="file in files" :key="file.name">
+    <label>{{file.name}}</label>
+  </div>
 </template>
 
 
